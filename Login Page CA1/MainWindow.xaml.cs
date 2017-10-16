@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
 
 namespace Login_Page_CA1
 {
@@ -23,6 +24,22 @@ namespace Login_Page_CA1
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();   
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\muhammad\Documents\data.mdf;Integrated Security=True;Connect Timeout=30");
+            SqlDataAdapter sda = new SqlDataAdapter("select count(*) from logic where username= " + textBox.Text+"and password" + textBox1.Text+"'",con);
+            
+           
+                this.Hide();
+            dashboard ss = new dashboard();
+            ss.Show();
         }
     }
 }
